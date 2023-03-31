@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
@@ -34,6 +35,7 @@ class AnimalPreview : Fragment() {
         val imgURLView = view.findViewById<ImageView>(R.id.imageViewPreview)
         val descriptionView = view.findViewById<TextView>(R.id.textView_DescriptionPreview)
         val buttonAdd = view.findViewById<Button>(R.id.button_add_animal_into_preview)
+
         nameView.text = name
         descriptionView.text = description
         Glide.with(imgURLView)
@@ -43,28 +45,30 @@ class AnimalPreview : Fragment() {
             .into(imgURLView)
 
         buttonAdd.setOnClickListener {
-            val addAnimal = Animal(imgURL, name, description)
-            addAnimals.add(addAnimal)
-            val bundle2 = Bundle()
+            if (name == "" || imgURL == "" || description == "") {
+                Toast.makeText(context, "Enter patam your animal!", Toast.LENGTH_LONG).show()
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_animalPreview_to_addAnimal)
+            } else {
+                val addAnimal = Animal(imgURL, name, description)
+                addAnimals.add(addAnimal)
+                val bundle2 = Bundle()
+                var temp = true
+                bundle2.putBoolean("bool", temp)
+                bundle2.putString("addName", name)
+                bundle2.putString("imgURL", imgURL)
+                bundle2.putString("description", description)
 
-            var temp = true
-
-            bundle2.putBoolean("bool", temp)
-            bundle2.putString("addName", name)
-            bundle2.putString("imgURL", imgURL)
-            bundle2.putString("description", description)
-
-            Navigation.findNavController(view)
-                .navigate(R.id.action_animalPreview_to_navigation_home, bundle2)
-
-            temp = false
+                Toast.makeText(
+                    context,
+                    "Your animal has been successfully added !",
+                    Toast.LENGTH_LONG
+                ).show()
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_animalPreview_to_navigation_home, bundle2)
+            }
         }
 
-
-
         return view
-
     }
-
-
 }

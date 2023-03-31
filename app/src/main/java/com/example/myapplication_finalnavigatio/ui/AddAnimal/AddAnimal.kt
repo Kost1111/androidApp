@@ -32,15 +32,14 @@ class AddAnimal : Fragment() {
             val name = editName.text.toString()
             val description = editDescription.text.toString()
 
-
-
             val bundle = Bundle()
+
             bundle.putString("addName", name)
             bundle.putString("imgURL", imgURL)
             bundle.putString("description", description)
 
-                Navigation.findNavController(view)
-                    .navigate(R.id.action_addAnimal_to_animalPreview, bundle)
+            Navigation.findNavController(view)
+                .navigate(R.id.action_addAnimal_to_animalPreview, bundle)
 
         }
 

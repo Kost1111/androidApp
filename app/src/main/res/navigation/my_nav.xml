@@ -54,6 +54,9 @@
             app:destination="@id/animalPreview"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_addAnimal_to_navigation_home"
+            app:destination="@id/navigation_home" />
     </fragment>
     <fragment
         android:id="@+id/animalPreview"
@@ -63,5 +66,8 @@
         <action
             android:id="@+id/action_animalPreview_to_navigation_home"
             app:destination="@id/navigation_home" />
+        <action
+            android:id="@+id/action_animalPreview_to_addAnimal"
+            app:destination="@id/addAnimal" />
     </fragment>
 </navigation>
