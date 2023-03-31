@@ -44,7 +44,7 @@ val animals = mutableListOf(
     Animal(
         "https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663115165_57-mykaleidoscope-ru-p-zlaya-kapibara-krasivo-63.jpg",
         "Копибара",
-        ""
+        "Это базовое животное, рост до 1 метра, весом до 50 кг, умеет только любить и никак иначе"
     ),
     Animal(
         "https://mirinteresen.net/uploads/posts/2018-03/1520833299_1-1.jpeg",
