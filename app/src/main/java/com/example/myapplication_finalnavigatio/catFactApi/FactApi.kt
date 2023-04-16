@@ -1,4 +1,4 @@
-package com.example.myapplication_finalnavigatio
+package com.example.myapplication_finalnavigatio.catFactApi
 
 import retrofit2.http.GET
 

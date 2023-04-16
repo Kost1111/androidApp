@@ -10,6 +10,7 @@ import com.example.myapplication_finalnavigatio.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         lateinit var binding: ActivityMainBinding
         super.onCreate(savedInstanceState)

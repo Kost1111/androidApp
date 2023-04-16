@@ -1,4 +1,4 @@
-package com.example.myapplication_finalnavigatio.ui.Home
+package com.example.myapplication_finalnavigatio.ui.home
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -10,12 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication_finalnavigatio.AnimalAdapter.Animal
-import com.example.myapplication_finalnavigatio.AnimalAdapter.AnimalAdapter
 import com.example.myapplication_finalnavigatio.R
+import com.example.myapplication_finalnavigatio.ui.animalAdapter.Animal
+import com.example.myapplication_finalnavigatio.ui.animalAdapter.AnimalAdapter
 
+const val keyName = "addName"
+const val imgURLKey = "imgURL"
+const val descriptionKey = "description"
+const val booleanKey = "bool"
 val likeAnimals = mutableListOf<Animal>()
-var addAnimals = mutableListOf<Animal>()
 val animals = mutableListOf(
     Animal(
         "https://animalreader.ru/wp-content/uploads/2014/02/ezhi_1_1.jpg",
@@ -75,23 +78,21 @@ class Home : Fragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         val adapter = AnimalAdapter()
         val itemClick = { animal: Animal ->
-            bundle.putString("imgURL", animal.imgURL)
-            bundle.putString("name", animal.name)
+            bundle.putString(imgURLKey, animal.imgURL)
+            bundle.putString(keyName, animal.name)
             Navigation.findNavController(view).navigate(R.id.action_home2_to_details, bundle)
-
         }
         val likeClick = { animal: Animal ->
             likeAnimals.add(animal)
-
             Unit
         }
 
-        if (arguments?.getBoolean("bool") == true) {
+        if (arguments?.getBoolean(booleanKey) == true) {
             animals.add(
                 Animal(
-                    arguments?.getString("imgURL"),
-                    arguments?.getString("addName"),
-                    arguments?.getString("description")
+                    arguments?.getString(imgURLKey),
+                    arguments?.getString(keyName),
+                    arguments?.getString(descriptionKey)
                 )
             )
 
@@ -104,11 +105,6 @@ class Home : Fragment() {
         adapter.submitList(animals.toList())
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
-        recyclerView.setOnClickListener {
-            animals.add(Animal("fsfsd", "sfsdsf", "sfwef"))
-            adapter.submitList(animals.toList())
-        }
-
         val buttonAdd: Button = view.findViewById(R.id.homeButtonAddAnimal)
         buttonAdd.setOnClickListener {
             adapter.submitList(animals.toList())
@@ -120,6 +116,4 @@ class Home : Fragment() {
 
         return view
     }
-
-
 }

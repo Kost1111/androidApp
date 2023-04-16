@@ -1,4 +1,4 @@
-package com.example.myapplication_finalnavigatio.AnimalAdapter
+package com.example.myapplication_finalnavigatio.ui.animalAdapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -47,6 +47,7 @@ class AnimalAdapter() : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Anim
             }
             like.setOnClickListener {
                 like.setImageResource(R.drawable.like)
+                like.isEnabled = false
                 animal.like = true
                 likeClick(animal)
             }
@@ -68,7 +69,6 @@ class AnimalAdapter() : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Anim
             override fun areContentsTheSame(oldItem: Animal, newItem: Animal): Boolean {
                 return oldItem.imgURL == newItem.imgURL
             }
-
         }
     }
 
