@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentDetailsBinding
+import com.example.myapplication_finalnavigatio.ui.home.imgURLKey
 
 
 class DetailsFragment : Fragment() {
@@ -21,10 +22,9 @@ class DetailsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val root = binding.root
-        val imgURL = arguments?.getString("imgURL")
+        val imgURL = arguments?.getString(imgURLKey)
         Glide.with(binding.imageViewAnimals)
             .load(imgURL)
             .centerCrop()

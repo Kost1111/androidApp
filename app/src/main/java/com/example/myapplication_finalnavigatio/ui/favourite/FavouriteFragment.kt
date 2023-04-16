@@ -37,6 +37,10 @@ class FavouriteFragment : Fragment() {
         val deleteClick = { animal: Animal ->
             likeAnimals.remove(animal)
             adapter.submitList(likeAnimals.toList())
+            if (likeAnimals.size == 0) {
+                binding.constraintPlaseHolder.visibility = View.VISIBLE
+                binding.recyclerViewLike.visibility = View.INVISIBLE
+            }
         }
         adapter.deleteClick = deleteClick
         adapter.submitList(likeAnimals.toList())

@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myapplication_finalnavigatio.R
 
-class AnimalAdapter() : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(AnimalDiffUtil()) {
+class AnimalAdapter : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(AnimalDiffUtil()) {
 
     var itemClick: (animal: Animal) -> Unit = { _ -> }
     var likeClick: (animal: Animal) -> Unit = { _ -> }
@@ -19,9 +19,9 @@ class AnimalAdapter() : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Anim
 
     inner class AnimalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun onBind(animal: Animal, position: Int) {
+        fun onBind(animal: Animal) {
 
-            val like: ImageView = itemView.findViewById(R.id.imageView2)
+            val like: ImageView = itemView.findViewById(R.id.ivLike)
 
             if (animal.like) {
                 like.setImageResource(R.drawable.like)
@@ -29,17 +29,17 @@ class AnimalAdapter() : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Anim
                 like.setImageResource(R.drawable.greey_like)
             }
 
-            val imageView: ImageView = itemView.findViewById(R.id.imageView)
+            val imageView: ImageView = itemView.findViewById(R.id.ivAvatar)
             Glide.with(imageView)
                 .load(animal.imgURL)
                 .error(R.drawable.error)
                 .centerCrop()
                 .into(imageView)
 
-            val name: TextView = itemView.findViewById(R.id.textView_name)
+            val name: TextView = itemView.findViewById(R.id.tvName)
             name.text = animal.name
 
-            val description: TextView = itemView.findViewById(R.id.textView_Description)
+            val description: TextView = itemView.findViewById(R.id.tvAbout)
             description.text = animal.description
 
             imageView.setOnClickListener {
@@ -80,6 +80,6 @@ class AnimalAdapter() : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Anim
 
     override fun onBindViewHolder(holder: AnimalViewHolder, position: Int) {
         val animal = getItem(position)
-        holder.onBind(animal, position)
+        holder.onBind(animal)
     }
 }

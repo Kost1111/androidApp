@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,7 +68,6 @@ val animals = mutableListOf(
 
 class Home : Fragment() {
 
-
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,7 +83,7 @@ class Home : Fragment() {
         }
         val likeClick = { animal: Animal ->
             likeAnimals.add(animal)
-            Unit
+            adapter.submitList(animals.toList())
         }
 
         if (arguments?.getBoolean(booleanKey) == true) {
@@ -95,7 +94,6 @@ class Home : Fragment() {
                     arguments?.getString(descriptionKey)
                 )
             )
-
             adapter.submitList(animals.toList())
             requireArguments().clear()
         }
@@ -105,8 +103,8 @@ class Home : Fragment() {
         adapter.submitList(animals.toList())
         val recyclerView: RecyclerView = view.findViewById(R.id.recyclerView)
 
-        val buttonAdd: Button = view.findViewById(R.id.homeButtonAddAnimal)
-        buttonAdd.setOnClickListener {
+        val cardView: CardView = view.findViewById(R.id.cardView)
+        cardView.setOnClickListener {
             adapter.submitList(animals.toList())
             Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_addAnimal)
         }

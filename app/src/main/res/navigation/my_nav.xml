@@ -23,6 +23,7 @@
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
+
     <fragment
         android:id="@+id/navigation_favourites"
         android:name="com.example.myapplication_finalnavigatio.ui.favourite.FavouriteFragment"
@@ -47,7 +48,7 @@
     <fragment
         android:id="@+id/addAnimal"
         android:name="com.example.myapplication_finalnavigatio.ui.addAnimal.AddAnimalFragment"
-        android:label="fragment_add_animal"
+        android:label="Add your animal!"
         tools:layout="@layout/fragment_add_animal" >
         <action
             android:id="@+id/action_addAnimal_to_animalPreview"
@@ -61,7 +62,7 @@
     <fragment
         android:id="@+id/animalPreview"
         android:name="com.example.myapplication_finalnavigatio.ui.animalPreview.AnimalPreviewFragment"
-        android:label="fragment_animal_preview"
+        android:label="Preview your animal!"
         tools:layout="@layout/fragment_animal_preview" >
         <action
             android:id="@+id/action_animalPreview_to_navigation_home"

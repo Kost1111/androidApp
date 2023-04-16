@@ -6,38 +6,53 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="Add your own animal "
-        android:textSize="25sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <Button
-        android:id="@+id/homeButtonAddAnimal"
-        android:layout_width="50dp"
-        android:layout_height="45dp"
-        android:background="@drawable/add_animal"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardCornerRadius="16dp"
+        android:layout_margin="4dp"
+        app:cardUseCompatPadding="true"
+        app:cardElevation="2dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints">
 
+
+        <TextView
+            android:id="@+id/textView4"
+            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="16dp"
+            android:text="Add your own animal "
+            android:textSize="25sp" />
+
+
+        <ImageView
+            android:id="@+id/ivButton"
+            android:layout_width="50dp"
+            android:layout_height="45dp"
+            android:layout_gravity="end|center"
+            android:layout_margin="16dp"
+            android:background="@drawable/add_animal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginStart="4dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="50dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
         tools:listitem="@layout/recyclerview_item" />
 
 
