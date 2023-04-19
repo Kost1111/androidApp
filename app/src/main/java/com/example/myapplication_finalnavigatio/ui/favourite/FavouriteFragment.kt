@@ -28,7 +28,7 @@ class FavouriteFragment : Fragment() {
     ): View {
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        visibilityPlaseHolder(binding.constraintPlaseHolder, binding.recyclerViewLike)
+        visibilityPlaceHolder(binding.constraintPlaseHolder, binding.recyclerViewLike)
         binding.bottomAddAnimals.setOnClickListener {
             Navigation.findNavController(root)
                 .navigate(R.id.action_navigation_favourites_to_navigation_home)
@@ -45,11 +45,11 @@ class FavouriteFragment : Fragment() {
         adapter.deleteClick = deleteClick
         adapter.submitList(likeAnimals.toList())
         binding.recyclerViewLike.adapter = adapter
-        binding.recyclerViewLike.layoutManager = LinearLayoutManager(activity)
+        binding.recyclerViewLike.layoutManager = LinearLayoutManager(requireContext())
         return root
     }
 
-    private fun visibilityPlaseHolder(constraint: ConstraintLayout, recyclerView: RecyclerView) {
+    private fun visibilityPlaceHolder(constraint: ConstraintLayout, recyclerView: RecyclerView) {
         if (likeAnimals.size !== 0) {
             constraint.visibility = View.INVISIBLE
             recyclerView.visibility = View.VISIBLE

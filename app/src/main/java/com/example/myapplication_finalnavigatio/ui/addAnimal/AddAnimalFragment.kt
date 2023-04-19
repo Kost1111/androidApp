@@ -26,18 +26,22 @@ class AddAnimalFragment : Fragment() {
     ): View {
         _binding = FragmentAddAnimalBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        val bundle = Bundle()
         binding.btnAddAnimal.setOnClickListener {
-            val imgURL = binding.tvImgURL.text.toString()
-            val name = binding.tvNameAddAnimal.text.toString()
-            val description = binding.tvDescription.text.toString()
-            bundle.putString(keyName, name)
-            bundle.putString(imgURLKey, imgURL)
-            bundle.putString(descriptionKey, description)
-            Navigation.findNavController(root)
-                .navigate(R.id.action_addAnimal_to_animalPreview, bundle)
+            addAnimal(root)
         }
         return root
+    }
+
+    private fun addAnimal(root: View) {
+        val bundle = Bundle()
+        val imgURL = binding.tvImgURL.text.toString()
+        val name = binding.tvNameAddAnimal.text.toString()
+        val description = binding.tvDescription.text.toString()
+        bundle.putString(keyName, name)
+        bundle.putString(imgURLKey, imgURL)
+        bundle.putString(descriptionKey, description)
+        Navigation.findNavController(root)
+            .navigate(R.id.action_addAnimal_to_animalPreview, bundle)
     }
 
     override fun onDestroy() {
