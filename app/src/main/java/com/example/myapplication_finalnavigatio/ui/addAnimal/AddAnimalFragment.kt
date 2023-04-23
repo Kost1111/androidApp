@@ -26,9 +26,11 @@ class AddAnimalFragment : Fragment() {
     ): View {
         _binding = FragmentAddAnimalBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
         binding.btnAddAnimal.setOnClickListener {
             addAnimal(root)
         }
+
         return root
     }
 

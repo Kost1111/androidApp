@@ -7,33 +7,34 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentFavouriteBinding
 import com.example.myapplication_finalnavigatio.ui.animalAdapter.Animal
 import com.example.myapplication_finalnavigatio.ui.animalAdapter.AnimalAdapter
 import com.example.myapplication_finalnavigatio.ui.home.likeAnimals
 
 
+@Suppress("DEPRECATED_IDENTITY_EQUALS")
 class FavouriteFragment : Fragment() {
     private var _binding: FragmentFavouriteBinding? = null
     private val binding get() = _binding!!
+    private lateinit var vm: FavouriteViewModel
 
     @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        vm = FavouriteViewModel()
         _binding = FragmentFavouriteBinding.inflate(inflater, container, false)
         val root: View = binding.root
         visibilityPlaceHolder(binding.constraintPlaseHolder, binding.recyclerViewLike)
-        binding.bottomAddAnimals.setOnClickListener {
-            Navigation.findNavController(root)
-                .navigate(R.id.action_navigation_favourites_to_navigation_home)
-        }
         val adapter = AnimalAdapter()
+        binding.bottomAddAnimals.setOnClickListener {
+          vm.navigateToo(root = root)
+        }
+
         val deleteClick = { animal: Animal ->
             likeAnimals.remove(animal)
             adapter.submitList(likeAnimals.toList())
@@ -49,7 +50,7 @@ class FavouriteFragment : Fragment() {
         return root
     }
 
-    private fun visibilityPlaceHolder(constraint: ConstraintLayout, recyclerView: RecyclerView) {
+    private fun visibilityPlaceHolder(constraint: ConstraintLayout, recyclerView: RecyclerView) =
         if (likeAnimals.size !== 0) {
             constraint.visibility = View.INVISIBLE
             recyclerView.visibility = View.VISIBLE
@@ -57,7 +58,6 @@ class FavouriteFragment : Fragment() {
             constraint.visibility = View.VISIBLE
             recyclerView.visibility = View.INVISIBLE
         }
-    }
 
     override fun onDestroyView() {
         super.onDestroyView()

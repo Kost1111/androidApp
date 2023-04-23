@@ -32,6 +32,7 @@ class DetailsFragment : Fragment() {
     ): View {
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val root = binding.root
+
         val imgURL = arguments?.getString(imgURLKey)
         Glide.with(binding.imageViewAnimals)
             .load(imgURL)
@@ -43,10 +44,7 @@ class DetailsFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        binding.longDescription.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
-        val radius: Float = binding.longDescription.textSize / 3
-        val filter = BlurMaskFilter(radius, BlurMaskFilter.Blur.SOLID)
-        binding.longDescription.paint.maskFilter = filter
+        addBlur()
 
         val factApi = retrofit.create(FactApi::class.java)
         lifecycleScope.launch(Dispatchers.Main) {
@@ -59,5 +57,12 @@ class DetailsFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    fun addBlur(){
+        binding.longDescription.setLayerType(View.LAYER_TYPE_SOFTWARE, null)
+        val radius: Float = binding.longDescription.textSize / 3
+        val filter = BlurMaskFilter(radius, BlurMaskFilter.Blur.SOLID)
+        binding.longDescription.paint.maskFilter = filter
     }
 }

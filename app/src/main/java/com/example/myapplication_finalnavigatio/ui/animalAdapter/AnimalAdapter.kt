@@ -20,28 +20,22 @@ class AnimalAdapter : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Animal
     inner class AnimalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun onBind(animal: Animal) {
-
             val like: ImageView = itemView.findViewById(R.id.ivLike)
-
             if (animal.like) {
                 like.setImageResource(R.drawable.like)
             } else {
                 like.setImageResource(R.drawable.greey_like)
             }
-
             val imageView: ImageView = itemView.findViewById(R.id.ivAvatar)
             Glide.with(imageView)
                 .load(animal.imgURL)
                 .error(R.drawable.error)
                 .centerCrop()
                 .into(imageView)
-
             val name: TextView = itemView.findViewById(R.id.tvName)
             name.text = animal.name
-
             val description: TextView = itemView.findViewById(R.id.tvAbout)
             description.text = animal.description
-
             imageView.setOnClickListener {
                 itemClick(animal)
             }
