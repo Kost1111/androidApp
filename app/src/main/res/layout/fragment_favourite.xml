@@ -13,8 +13,7 @@
         android:layout_height="match_parent"
         android:background="?attr/selectableItemBackground"
         android:orientation="vertical"
-        android:visibility="invisible"
-        tools:listitem="@layout/recyclerview_likeitem" />
+        android:visibility="invisible" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Your don't add animal in your Favoutite"
+            android:text="@string/your_don_t_add_animal_in_your_favoutite"
             android:textAllCaps="false"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -52,7 +51,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="add Animals"
+            android:text="@string/add_animal"
             android:textAllCaps="false"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

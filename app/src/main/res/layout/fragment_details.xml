@@ -9,7 +9,8 @@
     <ImageView
         android:id="@+id/imageViewAnimals"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:contentDescription="TODO" />
 
     <TextView
         android:id="@+id/longDescription"
@@ -23,5 +24,6 @@
         android:textStyle="bold"
         tools:ignore="MissingConstraints"
         tools:text="text Text FAct about cat" />
+
 
 </FrameLayout>

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="add_your_animal">Add Your Animal!</string>
     <string name="enter_name_your_animal">Enter name your animal</string>
     <string name="enter_url_about_photo_your_animal">Enter URL about photo your animal</string>
     <string name="enter_short_description_for_your_animal">Enter short description for your animal</string>
     <string name="preview_animal">Preview animal</string>
+    <string name="addanimal">AddAnimal!</string>
+    <string name="night_themes">Night themes</string>
 </resources>

@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/navigation_home"
         android:name="com.example.myapplication_finalnavigatio.ui.home.Home"
-        android:label="Animal Collections"
+        android:label="@string/animal_collections"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home2_to_details"
@@ -27,7 +27,7 @@
     <fragment
         android:id="@+id/navigation_favourites"
         android:name="com.example.myapplication_finalnavigatio.ui.favourite.FavouriteFragment"
-        android:label="Favourite Animals"
+        android:label="@string/favourite_animals"
         tools:layout="@layout/fragment_favourite" >
         <action
             android:id="@+id/action_navigation_favourites_to_navigation_home"
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.example.myapplication_finalnavigatio.ui.Settings.SettingsFragment"
-        android:label="Settings"
+        android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/details"
@@ -48,7 +48,7 @@
     <fragment
         android:id="@+id/addAnimal"
         android:name="com.example.myapplication_finalnavigatio.ui.addAnimal.AddAnimalFragment"
-        android:label="Add your animal!"
+        android:label="@string/add_your_animal"
         tools:layout="@layout/fragment_add_animal" >
         <action
             android:id="@+id/action_addAnimal_to_animalPreview"
@@ -62,7 +62,7 @@
     <fragment
         android:id="@+id/animalPreview"
         android:name="com.example.myapplication_finalnavigatio.ui.animalPreview.AnimalPreviewFragment"
-        android:label="Preview your animal!"
+        android:label="@string/previewAnimal"
         tools:layout="@layout/fragment_animal_preview" >
         <action
             android:id="@+id/action_animalPreview_to_navigation_home"

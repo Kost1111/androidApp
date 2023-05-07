@@ -45,17 +45,17 @@ class HomeFragmentViewModel : ViewModel() {
             Animal(
                 "https://mirinteresen.net/uploads/posts/2018-03/1520833299_1-1.jpeg",
                 "Медоед",
-                ""
+                "Бессметрное животное, съест любого"
             ),
             Animal(
                 "https://krasivosti.pro/uploads/posts/2021-07/1626139820_44-krasivosti-pro-p-oskal-panteri-semeistvo-koshachikh-krasivo-47.jpg",
                 "Пантера",
-                ""
+                "Обычная кошка необычных размеров"
             ),
             Animal(
                 "https://thongabeachlodge.co.za/wp-content/uploads/sites/15/2019/04/hippo_shutterstock_1098821045.jpg",
                 "Бегемот",
-                ""
+                "Здоровяк, который любит арбузики"
             ),
         )
     )
@@ -66,6 +66,7 @@ class HomeFragmentViewModel : ViewModel() {
     }
 
     val likeClick = { animal: Animal ->
+        animal.like = true
         likeAnimals.add(animal)
         Unit
     }

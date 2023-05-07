@@ -1,12 +1,21 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">My Application_FinalNavigatio</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home">home</string>
-    <string name="favourites">favourites</string>
-    <string name="settings">settings</string>
-    <string name="add_your_animal">Add Your Animal!</string>
+    <string name="home">Home</string>
+    <string name="favourites">Favourites</string>
+    <string name="settings">Settings</string>
+    <string name="add_your_animal">Add your animal!</string>
     <string name="enter_name_your_animal">Enter name your animal</string>
     <string name="enter_url_about_photo_your_animal">Enter URL about photo your animal</string>
     <string name="enter_short_description_for_your_animal">Enter short description for your animal</string>
     <string name="preview_animal">Preview animal</string>
+    <string name="add_animal" translatable="false">Add animal!</string>
+    <string name="your_don_t_add_animal_in_your_favoutite" translatable="false">Your don\'t add animal in your Favoutite</string>
+    <string name="animal_collections" translatable="false">Animal Collections</string>
+    <string name="favourite_animals" translatable="false">Favourite Animals</string>
+    <string name="previewAnimal" translatable="false">Preview your animal!</string>
+    <string name="night_theme">Night theme</string>
+    <string name="russian" tools:ignore="MissingTranslation">Russian</string>
+    <string name="english" tools:ignore="MissingTranslation">English</string>
+    <string name="change_the_language" tools:ignore="MissingTranslation">Language</string>
 </resources>
