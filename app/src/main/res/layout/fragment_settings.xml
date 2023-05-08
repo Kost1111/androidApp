@@ -22,28 +22,43 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
+    <Switch
+        android:id="@+id/switchFullScreen"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:layout_marginTop="50dp"
+        android:padding="8dp"
+        android:text="@string/full_screen"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/switchSettings"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
+
     <Button
         android:id="@+id/btnEng"
         android:layout_width="64dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:layout_marginTop="68dp"
-        android:text="lang"
         android:padding="8dp"
+        android:text="lang"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/switchFullScreen" />
 
     <TextView
         android:id="@+id/textLang"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
+        android:layout_marginStart="28dp"
         android:padding="8dp"
         android:text="@string/change_the_language"
         android:textAllCaps="false"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/switchSettings" />
+        app:layout_constraintTop_toBottomOf="@+id/switchFullScreen" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

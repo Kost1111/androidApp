@@ -18,4 +18,6 @@
     <string name="russian" tools:ignore="MissingTranslation">Russian</string>
     <string name="english" tools:ignore="MissingTranslation">English</string>
     <string name="change_the_language" tools:ignore="MissingTranslation">Language</string>
+    <string name="full_screen" tools:ignore="MissingTranslation">Full screen</string>
+    <string name="welcome_to_zoopedia" tools:ignore="MissingTranslation">Welcome to Zoopedia!</string>
 </resources>

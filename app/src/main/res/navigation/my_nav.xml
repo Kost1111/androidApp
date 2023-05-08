@@ -71,4 +71,15 @@
             android:id="@+id/action_animalPreview_to_addAnimal"
             app:destination="@id/addAnimal" />
     </fragment>
+    <fragment
+        android:id="@+id/splashScreenFragment"
+        android:name="com.example.myapplication_finalnavigatio.ui.splashScreen.SplashScreenFragment"
+        android:label="Welcome!"
+        tools:layout="@layout/fragment_splash_screen" >
+        <action
+            android:id="@+id/action_splashScreenFragment_to_navigation_home"
+            app:destination="@id/navigation_home"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
 </navigation>

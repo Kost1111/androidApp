@@ -16,5 +16,9 @@
     <string name="previewAnimal" translatable="false">Предварительный просмотр</string>
     <string name="night_theme" tools:ignore="ExtraTranslation">Ночная тема</string>
     <string name="change_the_language" tools:ignore="MissingTranslation">Язык</string>
+    <string name="full_screen" tools:ignore="MissingTranslation">Полноэкранный режим</string>
+    <string name="welcome_to_zoopedia" tools:ignore="MissingTranslation">Добро пожаловать в Зоопедию!</string>
+
+
 
 </resources>
