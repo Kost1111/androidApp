@@ -7,11 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import com.example.myapplication_finalnavigatio.databinding.FragmentDetailsBinding
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 
 class DetailsFragment : Fragment() {
@@ -29,14 +25,8 @@ class DetailsFragment : Fragment() {
         val root = binding.root
         vm.setImg(binding, arguments)
         vm.addBlur(binding)
+        vm.catFact(binding)
 
-        lifecycleScope.launch(Dispatchers.Main) {
-            val fact = withContext(Dispatchers.IO) { vm.factApi.getFactApi().fact }
-                if (fact.isNotBlank()) {
-                    binding.progressBar.visibility = View.INVISIBLE
-                    binding.longDescription.text = fact
-            }
-        }
         return root
     }
 

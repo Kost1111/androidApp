@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.hide()
         hideSystemUI()
         CoroutineScope(Dispatchers.Main).launch {
-            delay(5000)
+            delay(3000)
             _binding = ActivityMainBinding.inflate(layoutInflater)
             setContentView(binding.root)
             showSystemUI()

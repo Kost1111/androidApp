@@ -1,16 +1,20 @@
 package com.example.myapplication_finalnavigatio.ui.details
 
+import android.annotation.SuppressLint
 import android.graphics.BlurMaskFilter
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.example.myapplication_finalnavigatio.R
+import com.example.myapplication_finalnavigatio.catFactApi.CatFacts
 import com.example.myapplication_finalnavigatio.catFactApi.FactApi
 import com.example.myapplication_finalnavigatio.databinding.FragmentDetailsBinding
 import com.example.myapplication_finalnavigatio.ui.home.imgURLKey
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailsViewModel : ViewModel() {
 
@@ -30,11 +34,20 @@ class DetailsViewModel : ViewModel() {
             .into(binding.imageViewAnimals)
     }
 
-    private val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/ ")
-        .addConverterFactory(GsonConverterFactory.create())
-        .build()
-    val factApi = retrofit.create(FactApi::class.java)
+    fun catFact(binding: FragmentDetailsBinding) {
+        val api = FactApi.create().getFact()
+        api.enqueue(object : Callback<CatFacts> {
+            override fun onResponse(call: Call<CatFacts>, response: Response<CatFacts>) {
+                binding.progressBar.visibility = View.GONE
+                binding.longDescription.text = response.body()?.fact
+            }
 
-
-
+            @SuppressLint("SetTextI18n")
+            override fun onFailure(call: Call<CatFacts>, t: Throwable) {
+                binding.progressBar.visibility = View.GONE
+                binding.longDescription.setTextColor(Color.RED)
+                binding.longDescription.text = "${t.message}"
+            }
+        })
+    }
 }
