@@ -27,14 +27,14 @@ class DetailsFragment : Fragment() {
         vm = DetailsViewModel()
         _binding = FragmentDetailsBinding.inflate(inflater, container, false)
         val root = binding.root
-
         vm.setImg(binding, arguments)
         vm.addBlur(binding)
+
         lifecycleScope.launch(Dispatchers.Main) {
             val fact = withContext(Dispatchers.IO) { vm.factApi.getFactApi().fact }
-            if (fact !== null) {
-                binding.progressBar.visibility = View.INVISIBLE
-                binding.longDescription.text = fact
+                if (fact.isNotBlank()) {
+                    binding.progressBar.visibility = View.INVISIBLE
+                    binding.longDescription.text = fact
             }
         }
         return root

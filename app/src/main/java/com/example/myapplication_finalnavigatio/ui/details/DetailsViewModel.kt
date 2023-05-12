@@ -30,10 +30,11 @@ class DetailsViewModel : ViewModel() {
             .into(binding.imageViewAnimals)
     }
 
-    private val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/")
+    private val retrofit = Retrofit.Builder().baseUrl("https://catfact.ninja/ ")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     val factApi = retrofit.create(FactApi::class.java)
+
 
 
 }
