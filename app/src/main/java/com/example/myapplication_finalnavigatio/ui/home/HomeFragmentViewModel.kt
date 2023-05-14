@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.Navigation
 import com.example.myapplication_finalnavigatio.R
-import com.example.myapplication_finalnavigatio.ui.animalAdapter.Animal
+import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
 
 class HomeFragmentViewModel : ViewModel() {
 

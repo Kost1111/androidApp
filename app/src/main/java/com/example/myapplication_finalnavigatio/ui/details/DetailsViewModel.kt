@@ -8,8 +8,8 @@ import android.view.View
 import androidx.lifecycle.ViewModel
 import com.bumptech.glide.Glide
 import com.example.myapplication_finalnavigatio.R
-import com.example.myapplication_finalnavigatio.catFactApi.CatFacts
-import com.example.myapplication_finalnavigatio.catFactApi.FactApi
+import com.example.myapplication_finalnavigatio.cat_fact_api.model.CatFacts
+import com.example.myapplication_finalnavigatio.cat_fact_api.FactApi
 import com.example.myapplication_finalnavigatio.databinding.FragmentDetailsBinding
 import com.example.myapplication_finalnavigatio.ui.home.imgURLKey
 import retrofit2.Call

@@ -1,5 +1,6 @@
-package com.example.myapplication_finalnavigatio.catFactApi
+package com.example.myapplication_finalnavigatio.cat_fact_api
 
+import com.example.myapplication_finalnavigatio.cat_fact_api.model.CatFacts
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

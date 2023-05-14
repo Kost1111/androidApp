@@ -1,4 +1,4 @@
-package com.example.myapplication_finalnavigatio.ui.animalPreview
+package com.example.myapplication_finalnavigatio.ui.animal_preview
 
 import android.os.Bundle
 import android.view.View

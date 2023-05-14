@@ -9,9 +9,10 @@ import com.example.myapplication_finalnavigatio.databinding.FragmentSettingsBind
 class SettingViewModel : ViewModel() {
 
     fun colorChange(binding: FragmentSettingsBinding) {
-        if (binding.switchSettings.isChecked) {
+        if (binding.switchTheme.isChecked) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         } else {
+
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
     }

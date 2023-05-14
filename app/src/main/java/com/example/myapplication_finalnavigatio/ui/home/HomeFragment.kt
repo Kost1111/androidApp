@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.myapplication_finalnavigatio.databinding.FragmentHomeBinding
-import com.example.myapplication_finalnavigatio.ui.animalAdapter.Animal
-import com.example.myapplication_finalnavigatio.ui.animalAdapter.AnimalAdapter
+import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
+import com.example.myapplication_finalnavigatio.ui.animal_adapter.AnimalAdapter
+import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
 
 const val keyName = "addName"
 const val imgURLKey = "imgURL"
@@ -17,22 +17,19 @@ const val descriptionKey = "description"
 const val booleanKey = "bool"
 val likeAnimals = mutableListOf<Animal>()
 
-class Home : Fragment() {
-    private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+class Home : BaseFragment<FragmentHomeBinding>() {
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) ->
+    FragmentHomeBinding =
+        FragmentHomeBinding::inflate
     private lateinit var vm: HomeFragmentViewModel
 
-    @SuppressLint("MissingInflatedId", "FragmentLiveDataObserve")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    @SuppressLint("FragmentLiveDataObserve")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         vm = HomeFragmentViewModel()
-        _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
         vm.addUserAnimal(arguments)
         val adapter = AnimalAdapter()
-        adapter.itemClick = vm.itemClick(view = root)
+        adapter.itemClick = vm.itemClick(view = binding.root)
         adapter.likeClick = vm.likeClick
         vm.animalsLive.observe(this) {
             it.let {
@@ -40,15 +37,9 @@ class Home : Fragment() {
             }
         }
         binding.cardView.setOnClickListener {
-            vm.goToPreviewFragment(view = root)
+            vm.goToPreviewFragment(view = binding.root)
         }
         binding.recyclerView.adapter = adapter
         binding.recyclerView.layoutManager = LinearLayoutManager(activity)
-        return root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

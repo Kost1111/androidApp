@@ -47,7 +47,7 @@
         tools:layout="@layout/fragment_details" />
     <fragment
         android:id="@+id/addAnimal"
-        android:name="com.example.myapplication_finalnavigatio.ui.addAnimal.AddAnimalFragment"
+        android:name="com.example.myapplication_finalnavigatio.ui.add_animal.AddAnimalFragment"
         android:label="@string/add_your_animal"
         tools:layout="@layout/fragment_add_animal" >
         <action
@@ -61,7 +61,7 @@
     </fragment>
     <fragment
         android:id="@+id/animalPreview"
-        android:name="com.example.myapplication_finalnavigatio.ui.animalPreview.AnimalPreviewFragment"
+        android:name="com.example.myapplication_finalnavigatio.ui.animal_preview.AnimalPreviewFragment"
         android:label="@string/previewAnimal"
         tools:layout="@layout/fragment_animal_preview" >
         <action

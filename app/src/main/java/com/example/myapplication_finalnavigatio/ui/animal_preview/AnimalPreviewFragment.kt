@@ -1,35 +1,32 @@
-package com.example.myapplication_finalnavigatio.ui.animalPreview
+package com.example.myapplication_finalnavigatio.ui.animal_preview
 
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentAnimalPreviewBinding
+import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
 
 
-class AnimalPreviewFragment : Fragment() {
-    private var _binding: FragmentAnimalPreviewBinding? = null
-    private val binding get() = _binding!!
+class AnimalPreviewFragment : BaseFragment<FragmentAnimalPreviewBinding>() {
+
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) ->
+    FragmentAnimalPreviewBinding =
+        FragmentAnimalPreviewBinding::inflate
     private lateinit var vm: AnimalPreviewViewModel
 
-    @SuppressLint("MissingInflatedId", "SuspiciousIndentation", "FragmentLiveDataObserve")
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    @SuppressLint("FragmentLiveDataObserve")
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         vm = AnimalPreviewViewModel()
         vm.loadData(arguments)
 
         var name: String? = vm.resultName.value
         var imgURL: String? = vm.resultImgURL.value
         var description: String? = vm.resultDescription.value
-
-        _binding = FragmentAnimalPreviewBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
         vm.resultName.observe(this) {
             name = it
@@ -50,13 +47,7 @@ class AnimalPreviewFragment : Fragment() {
             .into(binding.ivPreviewAvatar)
 
         binding.butPreview.setOnClickListener {
-            vm.animalPreview(root, name, description, imgURL)
+            vm.animalPreview(binding.root, name, description, imgURL)
         }
-        return root
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
     }
 }

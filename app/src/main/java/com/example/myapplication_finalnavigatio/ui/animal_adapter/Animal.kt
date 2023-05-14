@@ -1,6 +1,4 @@
-package com.example.myapplication_finalnavigatio.ui.animalAdapter
-
-import androidx.recyclerview.widget.DiffUtil
+package com.example.myapplication_finalnavigatio.ui.animal_adapter
 
 data class Animal(
     val imgURL: String?,

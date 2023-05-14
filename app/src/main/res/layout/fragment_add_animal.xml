@@ -4,25 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.addAnimal.AddAnimalFragment">
+    tools:context=".ui.add_animal.AddAnimalFragment">
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_margin="32dp"
+        android:gravity="center"
         android:text="@string/add_your_animal"
         android:textAllCaps="false"
         android:textSize="25sp"
+        android:theme="@style/MaterialAlertDialog.Material3.Body.Text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/tvNameAddAnimal"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="32dp"
+        android:ems="100"
+        android:gravity="start"
         android:hint="@string/enter_name_your_animal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -30,9 +34,11 @@
 
     <EditText
         android:id="@+id/tvImgURL"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="32dp"
+        android:ems="100"
+        android:gravity="start"
         android:hint="@string/enter_url_about_photo_your_animal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,9 +47,11 @@
 
     <EditText
         android:id="@+id/tvDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="32dp"
+        android:ems="100"
+        android:gravity="start"
         android:hint="@string/enter_short_description_for_your_animal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

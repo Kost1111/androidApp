@@ -1,51 +1,63 @@
 package com.example.myapplication_finalnavigatio.ui.Settings
 
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.PopupMenu
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentSettingsBinding
+import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
 import java.util.*
 
 
-class SettingsFragment : Fragment() {
-
-    private var _binding: FragmentSettingsBinding? = null
-    private val binding get() = _binding!!
+@SuppressLint("CommitPrefEdits")
+class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
+    override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) ->
+    FragmentSettingsBinding =
+        FragmentSettingsBinding::inflate
     private lateinit var vm: SettingViewModel
+    private var fullScreenSaveState = "fullScreen"
+    private var nightThemeSaveState = "theme"
+    private var langSaveState = "lang"
+    private lateinit var sharedPreferencesFullScreen: SharedPreferences
+    private lateinit var sharedPreferencesTheme: SharedPreferences
+    private lateinit var sharedPreferencesLang: SharedPreferences
 
-    @SuppressLint("UseSwitchCompatOrMaterialCode")
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+    override fun onAttach(context: Context) {
+        sharedPreferencesFullScreen =
+            context.getSharedPreferences(fullScreenSaveState, Context.MODE_PRIVATE)
+        sharedPreferencesTheme =
+            context.getSharedPreferences(nightThemeSaveState, Context.MODE_PRIVATE)
+        sharedPreferencesLang =
+            context.getSharedPreferences(langSaveState, Context.MODE_PRIVATE)
+        super.onAttach(context)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         vm = SettingViewModel()
-        _binding = FragmentSettingsBinding.inflate(inflater, container, false)
-        val root: View = binding.root
-        binding.switchSettings.setOnCheckedChangeListener { _, _ ->
-            vm.colorChange(binding)
+        binding.switchFullScreen.isChecked =
+            sharedPreferencesFullScreen.getBoolean(fullScreenSaveState, false)
+        binding.switchTheme.isChecked =
+            sharedPreferencesTheme.getBoolean(nightThemeSaveState, false)
+
+        binding.switchTheme.setOnCheckedChangeListener { _, _ ->
+            colorChange(binding.switchTheme.isChecked)
         }
         binding.switchFullScreen.setOnCheckedChangeListener { _, _ ->
-            if (binding.switchFullScreen.isChecked) {
-                hideSystemUI()
-            } else {
-                showSystemUI()
-            }
+            fullScreenChange(binding.switchFullScreen.isChecked)
         }
         binding.btnEng.setOnClickListener {
             showPopup(binding.btnEng)
         }
-
-        return root
     }
 
-
     @SuppressWarnings("deprecation")
-    fun change(lang: String) {
+    private fun change(lang: String) {
         val config = resources.configuration
         val locale = Locale(lang)
         Locale.setDefault(locale)
@@ -61,9 +73,11 @@ class SettingsFragment : Fragment() {
             when (item!!.itemId) {
                 R.id.header1 -> {
                     change("ru")
+                    sharedPreferencesLang.edit().putString("ru", "en").apply()
                 }
                 R.id.header2 -> {
                     change("en")
+                    sharedPreferencesLang.edit().putString("en", "en").apply()
                 }
             }
             true
@@ -81,10 +95,26 @@ class SettingsFragment : Fragment() {
             (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION and View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
     }
 
+    private fun colorChange(boolean: Boolean) {
+        if (boolean) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            sharedPreferencesTheme.edit().putBoolean(nightThemeSaveState, true).apply()
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            sharedPreferencesTheme.edit().putBoolean(nightThemeSaveState, false).apply()
+        }
     }
 
+    private fun fullScreenChange(boolean: Boolean) {
+        if (boolean) {
+            hideSystemUI()
+            sharedPreferencesFullScreen.edit().putBoolean(fullScreenSaveState, true).apply()
+        } else {
+            showSystemUI()
+            sharedPreferencesFullScreen.edit().putBoolean(fullScreenSaveState, false).apply()
+        }
+    }
 }
+
+

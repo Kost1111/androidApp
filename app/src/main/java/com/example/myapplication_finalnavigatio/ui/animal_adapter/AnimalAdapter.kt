@@ -1,4 +1,4 @@
-package com.example.myapplication_finalnavigatio.ui.animalAdapter
+package com.example.myapplication_finalnavigatio.ui.animal_adapter
 
 import android.view.LayoutInflater
 import android.view.View
