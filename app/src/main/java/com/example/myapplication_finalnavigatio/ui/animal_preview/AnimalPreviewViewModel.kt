@@ -5,23 +5,33 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.example.myapplication_finalnavigatio.R
-import com.example.myapplication_finalnavigatio.ui.home.booleanKey
-import com.example.myapplication_finalnavigatio.ui.home.descriptionKey
-import com.example.myapplication_finalnavigatio.ui.home.imgURLKey
-import com.example.myapplication_finalnavigatio.ui.home.keyName
+import com.example.myapplication_finalnavigatio.database.LikedAnimalsInfo
+import com.example.myapplication_finalnavigatio.database.entites.LikedAnimalRepository
+import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
+import com.example.myapplication_finalnavigatio.utils.booleanKey
+import com.example.myapplication_finalnavigatio.utils.descriptionKey
+import com.example.myapplication_finalnavigatio.utils.imgURLKey
+import com.example.myapplication_finalnavigatio.utils.keyName
+import kotlinx.coroutines.launch
 
-class AnimalPreviewViewModel : ViewModel() {
+class AnimalPreviewViewModel(private val likedAnimalRepository: LikedAnimalRepository) :
+    ViewModel() {
 
-    private val resultLiveName = MutableLiveData<String>()
-    val resultName: LiveData<String> = resultLiveName
+    private val mAnimalLiveData = MutableLiveData<AnimalPresentationModel>()
+    val animalLiveData: LiveData<AnimalPresentationModel> = mAnimalLiveData
 
-    private val resultLiveImgURL = MutableLiveData<String>()
-    val resultImgURL: LiveData<String> = resultLiveImgURL
+    private val mLikedAnimals = MutableLiveData<List<LikedAnimalsInfo>>()
+    val likedAnimals: LiveData<List<LikedAnimalsInfo>> = mLikedAnimals
 
-    private val resultLiveDescription = MutableLiveData<String>()
-    val resultDescription: LiveData<String> = resultLiveDescription
+
+    fun insertNewLikedAnimals(animal: Animal) {
+        viewModelScope.launch {
+            likedAnimalRepository.insertNewLikedAnimals(animal.toLikedAnimalsDbEntity())
+        }
+    }
 
     fun animalPreview(root: View, name: String?, description: String?, imgURL: String?) {
         if (name == "" || imgURL == "" || description == "") {
@@ -40,9 +50,11 @@ class AnimalPreviewViewModel : ViewModel() {
     }
 
     fun loadData(argument: Bundle?) {
-        resultLiveName.value = argument?.getString(keyName)
-        resultLiveImgURL.value = argument?.getString(imgURLKey)
-        resultLiveDescription.value = argument?.getString(descriptionKey)
-
+        mAnimalLiveData.value?.name = argument?.getString(keyName)
+        mAnimalLiveData.value?.description = argument?.getString(imgURLKey)
+        mAnimalLiveData.value?.imgURL = argument?.getString(descriptionKey)
     }
+
+
 }
+

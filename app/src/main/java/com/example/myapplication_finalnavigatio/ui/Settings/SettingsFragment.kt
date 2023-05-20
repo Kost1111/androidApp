@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatDelegate
 import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentSettingsBinding
 import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
+import com.example.myapplication_finalnavigatio.utils.fullScreenSaveState
+import com.example.myapplication_finalnavigatio.utils.langSaveState
+import com.example.myapplication_finalnavigatio.utils.nightThemeSaveState
 import java.util.*
 
 
@@ -20,9 +23,7 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     FragmentSettingsBinding =
         FragmentSettingsBinding::inflate
     private lateinit var vm: SettingViewModel
-    private var fullScreenSaveState = "fullScreen"
-    private var nightThemeSaveState = "theme"
-    private var langSaveState = "lang"
+
     private lateinit var sharedPreferencesFullScreen: SharedPreferences
     private lateinit var sharedPreferencesTheme: SharedPreferences
     private lateinit var sharedPreferencesLang: SharedPreferences
@@ -40,19 +41,21 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         vm = SettingViewModel()
-        binding.switchFullScreen.isChecked =
-            sharedPreferencesFullScreen.getBoolean(fullScreenSaveState, false)
-        binding.switchTheme.isChecked =
-            sharedPreferencesTheme.getBoolean(nightThemeSaveState, false)
+        binding.apply {
+            switchFullScreen.isChecked =
+                sharedPreferencesFullScreen.getBoolean(fullScreenSaveState, false)
+            switchTheme.isChecked =
+                sharedPreferencesTheme.getBoolean(nightThemeSaveState, false)
 
-        binding.switchTheme.setOnCheckedChangeListener { _, _ ->
-            colorChange(binding.switchTheme.isChecked)
-        }
-        binding.switchFullScreen.setOnCheckedChangeListener { _, _ ->
-            fullScreenChange(binding.switchFullScreen.isChecked)
-        }
-        binding.btnEng.setOnClickListener {
-            showPopup(binding.btnEng)
+            switchTheme.setOnCheckedChangeListener { _, _ ->
+                vm.colorChange(switchTheme.isChecked)
+            }
+            switchFullScreen.setOnCheckedChangeListener { _, _ ->
+                fullScreenChange(binding.switchFullScreen.isChecked)
+            }
+            btnEng.setOnClickListener {
+                showPopup(binding.btnEng)
+            }
         }
     }
 

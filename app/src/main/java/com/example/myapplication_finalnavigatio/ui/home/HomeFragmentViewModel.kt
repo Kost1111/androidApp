@@ -5,61 +5,30 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.Navigation
 import com.example.myapplication_finalnavigatio.R
+import com.example.myapplication_finalnavigatio.database.LikedAnimalsInfo
+import com.example.myapplication_finalnavigatio.database.entites.LikedAnimalRepository
 import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
+import com.example.myapplication_finalnavigatio.utils.*
+import kotlinx.coroutines.launch
 
-class HomeFragmentViewModel : ViewModel() {
+class HomeFragmentViewModel(private val likedAnimalRepository: LikedAnimalRepository) :
+    ViewModel() {
 
-    private val animalsLiveData = MutableLiveData(
-        mutableListOf(
-            Animal(
-                "https://animalreader.ru/wp-content/uploads/2014/02/ezhi_1_1.jpg",
-                "Ёжик",
-                "Это Ёжик! он обитает в лесах и морях, может быть злым и жестоким, поэтому лучше его не злить, подробное описание" +
-                        "можно посмотреть нажав на картинку"
-            ),
-            Animal(
-                "https://kipmu.ru/wp-content/uploads/slnmgbgprg-scaled.jpg",
-                "Слон",
-                "Большой и могучий слон ! Поднимает на бицепс не меньше центнера, крайне уверенное в себе животное " +
-                        "Если столкнетесь с ним, лучше бегите!"
-            ),
-            Animal(
-                "https://cdn.fishki.net/upload/post/2016/04/30/1937149/277276-frederika.jpg",
-                "Крокодил",
-                "Такая пасть, что может проглотить и даже не заметить. С легкостью может съесть тигра и даже бегемота" +
-                        "быть максимально бдительным в случае встречи с ним! "
-            ),
-            Animal(
-                "https://mobimg.b-cdn.net/v3/fetch/77/77589b6e8601d844e1093e6d5ad54e3f.jpeg?w=2000",
-                "Тигр",
-                "Базовый царь зверей! Всех прекрасней и умее. бегает быстро, кусает больно, красивый!" +
-                        "но в качестве домашнего животного будет перебор "
-            ),
-            Animal(
-                "https://mykaleidoscope.ru/x/uploads/posts/2022-09/1663115165_57-mykaleidoscope-ru-p-zlaya-kapibara-krasivo-63.jpg",
-                "Копибара",
-                "Это базовое животное, рост до 1 метра, весом до 50 кг, умеет только любить и никак иначе"
-            ),
-            Animal(
-                "https://mirinteresen.net/uploads/posts/2018-03/1520833299_1-1.jpeg",
-                "Медоед",
-                "Бессметрное животное, съест любого"
-            ),
-            Animal(
-                "https://krasivosti.pro/uploads/posts/2021-07/1626139820_44-krasivosti-pro-p-oskal-panteri-semeistvo-koshachikh-krasivo-47.jpg",
-                "Пантера",
-                "Обычная кошка необычных размеров"
-            ),
-            Animal(
-                "https://thongabeachlodge.co.za/wp-content/uploads/sites/15/2019/04/hippo_shutterstock_1098821045.jpg",
-                "Бегемот",
-                "Здоровяк, который любит арбузики"
-            ),
-        )
-    )
+    private val animalsLiveData = MutableLiveData(animals)
     val animalsLive: LiveData<MutableList<Animal>> = animalsLiveData
+
+    private val mLikedAnimals = MutableLiveData<List<LikedAnimalsInfo>>()
+    val likedAnimals: LiveData<List<LikedAnimalsInfo>> = mLikedAnimals
+
+
+    private fun insertNewLikedAnimals(animal: Animal) {
+        viewModelScope.launch {
+            likedAnimalRepository.insertNewLikedAnimals(animal.toLikedAnimalsDbEntity())
+        }
+    }
 
     private fun addAnimal(animal: Animal) {
         animalsLiveData.value?.add(animal)
@@ -68,14 +37,18 @@ class HomeFragmentViewModel : ViewModel() {
     val likeClick = { animal: Animal ->
         animal.like = true
         likeAnimals.add(animal)
+        insertNewLikedAnimals(animal = Animal(animal.imgURL, animal.name, animal.description))
         Unit
     }
+
 
     fun itemClick(view: View): (Animal) -> Unit {
         val bundle = Bundle()
         val itemClick = { animal: Animal ->
-            bundle.putString(imgURLKey, animal.imgURL)
-            bundle.putString(keyName, animal.name)
+            bundle.apply {
+                putString(imgURLKey, animal.imgURL)
+                putString(keyName, animal.name)
+            }
             Navigation.findNavController(view).navigate(R.id.action_home2_to_details, bundle)
         }
         return itemClick

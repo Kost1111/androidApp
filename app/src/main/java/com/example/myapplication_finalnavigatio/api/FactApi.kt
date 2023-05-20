@@ -1,6 +1,7 @@
-package com.example.myapplication_finalnavigatio.cat_fact_api
+package com.example.myapplication_finalnavigatio.api
 
-import com.example.myapplication_finalnavigatio.cat_fact_api.model.CatFacts
+import com.example.myapplication_finalnavigatio.api.model.CatFacts
+import com.example.myapplication_finalnavigatio.utils.BASE_URL
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,9 +13,6 @@ interface FactApi {
     fun getFact(): Call<CatFacts>
 
     companion object {
-
-        var BASE_URL = "https://catfact.ninja"
-
         fun create(): FactApi {
 
             val retrofit = Retrofit.Builder()

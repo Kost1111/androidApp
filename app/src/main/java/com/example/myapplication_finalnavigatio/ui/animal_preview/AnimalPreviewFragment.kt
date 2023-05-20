@@ -5,10 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
+import com.example.myapplication_finalnavigatio.Dependencies
 import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentAnimalPreviewBinding
+import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
 import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
+import com.example.myapplication_finalnavigatio.utils.booleanKey
+import com.example.myapplication_finalnavigatio.utils.descriptionKey
+import com.example.myapplication_finalnavigatio.utils.imgURLKey
+import com.example.myapplication_finalnavigatio.utils.keyName
 
 
 class AnimalPreviewFragment : BaseFragment<FragmentAnimalPreviewBinding>() {
@@ -16,38 +23,51 @@ class AnimalPreviewFragment : BaseFragment<FragmentAnimalPreviewBinding>() {
     override val bindingInflater: (LayoutInflater, ViewGroup?, Boolean) ->
     FragmentAnimalPreviewBinding =
         FragmentAnimalPreviewBinding::inflate
-    private lateinit var vm: AnimalPreviewViewModel
+
+    private  val vm by lazy { AnimalPreviewViewModel(Dependencies.statisticRepository) }
 
     @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        vm = AnimalPreviewViewModel()
-        vm.loadData(arguments)
+        Dependencies.init(requireContext())
+        val name: String? = arguments?.getString(keyName)
+        val imgURL: String? = arguments?.getString(imgURLKey)
+        val description: String? = arguments?.getString(descriptionKey)
 
-        var name: String? = vm.resultName.value
-        var imgURL: String? = vm.resultImgURL.value
-        var description: String? = vm.resultDescription.value
+        binding.apply {
+            tvNamePreview.text = name
+            tvDescriptionPreview.text = description
+            Glide.with(ivPreviewAvatar)
+                .load(imgURL)
+                .centerCrop()
+                .error(R.drawable.error)
+                .into(ivPreviewAvatar)
 
-        vm.resultName.observe(this) {
-            name = it
+            vm.insertNewLikedAnimals(animal = Animal(imgURL, name, description))
+
+            butPreview.setOnClickListener {
+                animalPreview(root, name, description, imgURL)
+            }
         }
-        vm.resultImgURL.observe(this) {
-            imgURL = it
-        }
-        vm.resultDescription.observe(this) {
-            description = it
-        }
+    }
 
-        binding.tvNamePreview.text = name
-        binding.tvDescriptionPreview.text = description
-        Glide.with(binding.ivPreviewAvatar)
-            .load(imgURL)
-            .centerCrop()
-            .error(R.drawable.error)
-            .into(binding.ivPreviewAvatar)
 
-        binding.butPreview.setOnClickListener {
-            vm.animalPreview(binding.root, name, description, imgURL)
+    private fun animalPreview(root: View, name: String?, description: String?, imgURL: String?) {
+        if (name == "" || imgURL == "" || description == "") {
+            Navigation.findNavController(root)
+                .navigate(R.id.action_animalPreview_to_addAnimal)
+        } else {
+            val temp = true
+            val bundle2 = Bundle()
+            bundle2.apply {
+                putBoolean(booleanKey, temp)
+                putString(keyName, name)
+                putString(imgURLKey, imgURL)
+                putString(descriptionKey, description)
+            }
+
+            Navigation.findNavController(root)
+                .navigate(R.id.action_animalPreview_to_navigation_home, bundle2)
         }
     }
 }

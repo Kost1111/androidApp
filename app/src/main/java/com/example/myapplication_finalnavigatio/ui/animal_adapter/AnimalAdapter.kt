@@ -20,7 +20,7 @@ class AnimalAdapter : ListAdapter<Animal, AnimalAdapter.AnimalViewHolder>(Animal
     inner class AnimalViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
         fun onBind(animal: Animal) {
-            val like: ImageView = itemView.findViewById(R.id.ivLike)
+            val like: ImageView = itemView.findViewById(R.id.ivRemove)
             if (animal.like) {
                 like.setImageResource(R.drawable.like)
             } else {

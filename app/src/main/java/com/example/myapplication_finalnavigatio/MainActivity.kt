@@ -8,23 +8,22 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.myapplication_finalnavigatio.databinding.ActivityMainBinding
+import com.example.myapplication_finalnavigatio.utils.fullScreenSaveState
+import com.example.myapplication_finalnavigatio.utils.nightThemeSaveState
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
-
     private lateinit var sharedPreferencesFullScreen: SharedPreferences
     private lateinit var sharedPreferencesTheme: SharedPreferences
-
-    var fullScreenSaveState = "fullScreen"
-    var nightThemeSaveState = "theme"
+    private lateinit var navController: NavController
 
     @SuppressLint("AppCompatMethod")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         checkFullScreen(sharedPreferencesTheme.getBoolean(nightThemeSaveState, false))
         checkTheme(sharedPreferencesFullScreen.getBoolean(fullScreenSaveState, false))
         val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        navController = findNavController(R.id.nav_host_fragment_activity_main)
         setupActionBarWithNavController(navController)
         navView.setupWithNavController(navController)
     }

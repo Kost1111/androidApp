@@ -76,7 +76,7 @@
             android:layout_height="40dp"
             android:layout_gravity="end|center"
             android:layout_marginEnd="16dp"
-            android:src="@drawable/greey_like"
+            android:src="@drawable/remove"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
