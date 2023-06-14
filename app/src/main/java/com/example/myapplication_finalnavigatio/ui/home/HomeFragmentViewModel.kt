@@ -11,7 +11,9 @@ import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.database.LikedAnimalsInfo
 import com.example.myapplication_finalnavigatio.database.entites.LikedAnimalRepository
 import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
-import com.example.myapplication_finalnavigatio.utils.*
+import com.example.myapplication_finalnavigatio.utils.imgURLKey
+import com.example.myapplication_finalnavigatio.utils.keyName
+import com.example.myapplication_finalnavigatio.utils.likeAnimals
 import kotlinx.coroutines.launch
 
 class HomeFragmentViewModel(private val likedAnimalRepository: LikedAnimalRepository) :
@@ -23,6 +25,9 @@ class HomeFragmentViewModel(private val likedAnimalRepository: LikedAnimalReposi
     private val mLikedAnimals = MutableLiveData<List<LikedAnimalsInfo>>()
     val likedAnimals: LiveData<List<LikedAnimalsInfo>> = mLikedAnimals
 
+    init {
+        getAllLikedAnimal()
+    }
 
     private fun insertNewLikedAnimals(animal: Animal) {
         viewModelScope.launch {
@@ -30,17 +35,11 @@ class HomeFragmentViewModel(private val likedAnimalRepository: LikedAnimalReposi
         }
     }
 
-    private fun addAnimal(animal: Animal) {
-        animalsLiveData.value?.add(animal)
-    }
-
     val likeClick = { animal: Animal ->
         animal.like = true
         likeAnimals.add(animal)
         insertNewLikedAnimals(animal = Animal(animal.imgURL, animal.name, animal.description))
-        Unit
     }
-
 
     fun itemClick(view: View): (Animal) -> Unit {
         val bundle = Bundle()
@@ -54,19 +53,14 @@ class HomeFragmentViewModel(private val likedAnimalRepository: LikedAnimalReposi
         return itemClick
     }
 
-    fun addUserAnimal(arguments: Bundle?) {
-        if (arguments?.getBoolean(booleanKey) == true) {
-            val animal = Animal(
-                arguments.getString(imgURLKey),
-                arguments.getString(keyName),
-                arguments.getString(descriptionKey)
-            )
-            addAnimal(animal)
-        }
-    }
-
     fun goToPreviewFragment(view: View) {
         Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_addAnimal)
+    }
+
+    private fun getAllLikedAnimal() {
+        viewModelScope.launch {
+            mLikedAnimals.value = likedAnimalRepository.getAllLikedAnimals()
+        }
     }
 }
 

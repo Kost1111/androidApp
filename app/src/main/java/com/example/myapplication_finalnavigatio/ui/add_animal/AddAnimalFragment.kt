@@ -20,7 +20,6 @@ class AddAnimalFragment : BaseFragment<FragmentAddAnimalBinding>() {
         FragmentAddAnimalBinding::inflate
     private lateinit var vm: AddAnimalViewModel
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnAddAnimal.setOnClickListener {
             addAnimal(binding.root)

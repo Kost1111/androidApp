@@ -32,7 +32,6 @@ interface LikedAnimalsItemListener {
     fun removeLikedAnimals(id: Int)
 }
 
-
 class LikedAnimalAdapter(private val likedAnimalsItemListener: LikedAnimalsItemListener) :
     RecyclerView.Adapter<LikedAnimalAdapter.LikedViewHolder>(), View.OnClickListener {
 
@@ -46,7 +45,6 @@ class LikedAnimalAdapter(private val likedAnimalsItemListener: LikedAnimalsItemL
 
     override fun getItemCount(): Int = data.size
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LikedViewHolder {
         val inflater = LayoutInflater.from(parent.context)
         val binding = LikedanimalsItemBinding.inflate(inflater, parent, false)
@@ -54,13 +52,11 @@ class LikedAnimalAdapter(private val likedAnimalsItemListener: LikedAnimalsItemL
         return LikedViewHolder(binding)
     }
 
-
     override fun onBindViewHolder(holder: LikedViewHolder, position: Int) {
         val likedAnimals = data[position]
 
         with(holder.binding) {
             ivRemove.tag = likedAnimals
-
             tvName.text = likedAnimals.name
             tvAbout.text = likedAnimals.description
             Glide.with(ivAvatar)

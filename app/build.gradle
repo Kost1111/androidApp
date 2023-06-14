@@ -17,9 +17,9 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         kapt {
-            arguments {arg("room.schemaLocation", "$projectDir/schemas")}
+            arguments { arg("room.schemaLocation", "$projectDir/schemas") }
         }
-        
+
     }
 
     buildTypes {
@@ -69,12 +69,6 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.5.1' // Библиотека "Room"
     kapt "androidx.room:room-compiler:2.5.1" // Кодогенератор
     implementation 'androidx.room:room-ktx:2.5.1'
-
-
-
-
-    //  implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4' // Kotlin Coroutines
-
 
 }
 

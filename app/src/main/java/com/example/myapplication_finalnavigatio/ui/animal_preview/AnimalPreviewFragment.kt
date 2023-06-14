@@ -12,7 +12,7 @@ import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentAnimalPreviewBinding
 import com.example.myapplication_finalnavigatio.ui.animal_adapter.Animal
 import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
-import com.example.myapplication_finalnavigatio.utils.booleanKey
+import com.example.myapplication_finalnavigatio.ui.home.animals
 import com.example.myapplication_finalnavigatio.utils.descriptionKey
 import com.example.myapplication_finalnavigatio.utils.imgURLKey
 import com.example.myapplication_finalnavigatio.utils.keyName
@@ -24,7 +24,7 @@ class AnimalPreviewFragment : BaseFragment<FragmentAnimalPreviewBinding>() {
     FragmentAnimalPreviewBinding =
         FragmentAnimalPreviewBinding::inflate
 
-    private  val vm by lazy { AnimalPreviewViewModel(Dependencies.statisticRepository) }
+    private val vm by lazy { AnimalPreviewViewModel(Dependencies.statisticRepository) }
 
     @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,32 +42,21 @@ class AnimalPreviewFragment : BaseFragment<FragmentAnimalPreviewBinding>() {
                 .centerCrop()
                 .error(R.drawable.error)
                 .into(ivPreviewAvatar)
-
-            vm.insertNewLikedAnimals(animal = Animal(imgURL, name, description))
-
             butPreview.setOnClickListener {
                 animalPreview(root, name, description, imgURL)
             }
         }
     }
 
-
     private fun animalPreview(root: View, name: String?, description: String?, imgURL: String?) {
         if (name == "" || imgURL == "" || description == "") {
             Navigation.findNavController(root)
                 .navigate(R.id.action_animalPreview_to_addAnimal)
         } else {
-            val temp = true
-            val bundle2 = Bundle()
-            bundle2.apply {
-                putBoolean(booleanKey, temp)
-                putString(keyName, name)
-                putString(imgURLKey, imgURL)
-                putString(descriptionKey, description)
-            }
-
+            animals.add(Animal(imgURL, name, description))
+            vm.insertNewLikedAnimals(animal = Animal(imgURL, name, description))
             Navigation.findNavController(root)
-                .navigate(R.id.action_animalPreview_to_navigation_home, bundle2)
+                .navigate(R.id.action_animalPreview_to_navigation_home)
         }
     }
 }

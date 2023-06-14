@@ -24,5 +24,4 @@ class LikedAnimalRepository(private val likedAnimalsDAO: LikedAnimalsDAO) {
             likedAnimalsDAO.deleteLikedAnimal(id)
         }
     }
-
 }

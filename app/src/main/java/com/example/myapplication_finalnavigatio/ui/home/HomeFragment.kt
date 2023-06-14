@@ -17,12 +17,10 @@ class Home : BaseFragment<FragmentHomeBinding>() {
         FragmentHomeBinding::inflate
     private val vm by lazy { HomeFragmentViewModel(Dependencies.statisticRepository) }
 
-
     @SuppressLint("FragmentLiveDataObserve")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Dependencies.init(requireContext())
-        vm.addUserAnimal(arguments)
         val adapter = AnimalAdapter().apply {
             itemClick = vm.itemClick(view = binding.root)
             likeClick = vm.likeClick

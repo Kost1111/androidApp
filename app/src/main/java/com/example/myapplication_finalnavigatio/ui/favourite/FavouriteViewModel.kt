@@ -19,20 +19,17 @@ class FavouriteViewModel(private val likedAnimalRepository: LikedAnimalRepositor
 
     val likedAnimalsItemListener = object : LikedAnimalsItemListener {
         override fun getInfoAboutLikedAnimal(id: Int) {
-            val likedAnimaId = mLikedAnimals.value?.indexOfFirst { it.id == id }
-            if (likedAnimaId == -1) return
-
-            val likedAnimalsInfo = mLikedAnimals.value?.get(likedAnimaId!!)
-            println(likedAnimalsInfo)
+//            val likedAnimaId = mLikedAnimals.value?.indexOfFirst { it.id == id }
+//            if (likedAnimaId == -1) return
+//            val likedAnimalsInfo = mLikedAnimals.value?.get(likedAnimaId!!)
+//            println(likedAnimalsInfo)
         }
 
         override fun removeLikedAnimals(id: Int) {
             viewModelScope.launch {
                 likedAnimalRepository.removeLikedAnimals(id)
-                getAllLikedAnimal()
             }
         }
-
     }
 
 
@@ -41,5 +38,4 @@ class FavouriteViewModel(private val likedAnimalRepository: LikedAnimalRepositor
             mLikedAnimals.value = likedAnimalRepository.getAllLikedAnimals()
         }
     }
-
 }

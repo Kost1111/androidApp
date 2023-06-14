@@ -1,4 +1,4 @@
-package com.example.myapplication_finalnavigatio.ui.Settings
+package com.example.myapplication_finalnavigatio.ui.settings
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.PopupMenu
-import androidx.appcompat.app.AppCompatDelegate
 import com.example.myapplication_finalnavigatio.R
 import com.example.myapplication_finalnavigatio.databinding.FragmentSettingsBinding
 import com.example.myapplication_finalnavigatio.ui.base_fragment.BaseFragment
@@ -96,17 +95,6 @@ class SettingsFragment : BaseFragment<FragmentSettingsBinding>() {
     private fun showSystemUI() {
         requireActivity().window.decorView.systemUiVisibility =
             (View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION and View.SYSTEM_UI_FLAG_LAYOUT_STABLE)
-    }
-
-    private fun colorChange(boolean: Boolean) {
-        if (boolean) {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            sharedPreferencesTheme.edit().putBoolean(nightThemeSaveState, true).apply()
-
-        } else {
-            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            sharedPreferencesTheme.edit().putBoolean(nightThemeSaveState, false).apply()
-        }
     }
 
     private fun fullScreenChange(boolean: Boolean) {
