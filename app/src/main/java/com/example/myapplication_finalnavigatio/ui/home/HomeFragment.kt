@@ -38,4 +38,9 @@ class Home : BaseFragment<FragmentHomeBinding>() {
             recyclerView.layoutManager = LinearLayoutManager(activity)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+
+    }
 }
